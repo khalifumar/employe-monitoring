@@ -4,7 +4,7 @@
   "private": true,
   "description": "Selaras — Privacy-by-design employee health, posture, and focus analytics",
   "scripts": {
-    "build": "pnpm --filter \"./packages/*\" --filter \"./apps/*\" run build",
+    "build": "pnpm --filter @selaras/dashboard build",
     "dev:dashboard": "pnpm --filter @selaras/dashboard dev",
     "dev:extension": "pnpm --filter @selaras/extension dev",
     "test": "pnpm --filter \"./packages/*\" --filter \"./apps/*\" run test && vitest run supabase/tests/rls.test.ts",
