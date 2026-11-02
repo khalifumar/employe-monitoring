@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #FBFBF9;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F4F4F0;
+  --text-primary: #181E29;
+  --text-secondary: #5F6B7C;
+  --text-muted: #8C97A7;
+  --border-subtle: #E6E8EC;
+  --accent-teal: #0D9488;
+  --accent-indigo: #4F46E5;
+  --accent-coral: #F97356;
+}
+
+.dark {
+  --bg-primary: #0F1117;
+  --bg-surface: #181C24;
+  --bg-subtle: #222732;
+  --text-primary: #F1F3F7;
+  --text-secondary: #9AA4B2;
+  --text-muted: #667085;
+  --border-subtle: #2A303C;
+  --accent-teal: #14B8A6;
+  --accent-indigo: #6366F1;
+  --accent-coral: #FB923C;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(230, 232, 236, 0.7);
+}
+
+.dark .glass-panel {
+  background: rgba(24, 28, 36, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 48, 60, 0.7);
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent-teal);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

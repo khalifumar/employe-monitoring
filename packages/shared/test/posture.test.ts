@@ -3,6 +3,8 @@ import {
   calculateHeadForwardAngle,
   calculateShoulderTilt,
   calculateScreenDistanceProxy,
+  calculateSlouchRatio,
+  calculateNeckAngle,
 } from "../src/math/posture";
 
 describe("calculateHeadForwardAngle", () => {
@@ -57,5 +59,37 @@ describe("calculateScreenDistanceProxy", () => {
 
     const dist = calculateScreenDistanceProxy(leftEye, rightEye);
     expect(dist).toBeCloseTo(40.0);
+  });
+});
+
+describe("PostureGuardAI algorithms: calculateSlouchRatio & calculateNeckAngle", () => {
+  it("computes slouch compression ratio accurately", () => {
+    const headMid = { x: 150, y: 100 };
+    const leftShoulder = { x: 100, y: 200 };
+    const rightShoulder = { x: 200, y: 200 };
+
+    // shoulderWidth = 100, shoulderMidY = 200, neckVerticalHeight = 100
+    // ratio = 100 / 100 = 1.0 (very upright)
+    const ratio = calculateSlouchRatio(headMid, leftShoulder, rightShoulder);
+    expect(ratio).toBeCloseTo(1.0);
+  });
+
+  it("detects low ratio when head sinks towards shoulders (slouching)", () => {
+    const headMid = { x: 150, y: 175 }; // head sank 25px above shoulder
+    const leftShoulder = { x: 100, y: 200 };
+    const rightShoulder = { x: 200, y: 200 };
+
+    // shoulderWidth = 100, neckVerticalHeight = 25
+    // ratio = 25 / 100 = 0.25 (< 0.38 slouch threshold)
+    const ratio = calculateSlouchRatio(headMid, leftShoulder, rightShoulder);
+    expect(ratio).toBeCloseTo(0.25);
+    expect(ratio < 0.38).toBe(true);
+  });
+
+  it("calculates aspect-ratio corrected neck angle", () => {
+    const ear = { x: 150, y: 100 };
+    const shoulder = { x: 150, y: 200 }; // vertically aligned
+    const angle = calculateNeckAngle(ear, shoulder, 1.0);
+    expect(angle).toBeCloseTo(0.0);
   });
 });

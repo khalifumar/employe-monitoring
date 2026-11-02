@@ -52,3 +52,48 @@ export function calculateScreenDistanceProxy(
 ): number {
   return euclideanDistance(leftEye, rightEye);
 }
+
+/**
+ * Menghitung Vertical Slouch Ratio (Vertical Neck / Shoulder Width)
+ * Mengadopsi arsitektur PostureGuardAI (Khalif Umar Al Faruq).
+ *
+ * - Posisi Tegak: Ratio Tinggi (> 0.38 - 0.5)
+ * - Posisi Bungkuk (Slouching/Kepala Tenggelam): Ratio Rendah (< 0.38)
+ *
+ * @param headMid Titik tengah kepala/telinga atau mulut
+ * @param leftShoulder Titik bahu kiri
+ * @param rightShoulder Titik bahu kanan
+ * @returns Compression ratio
+ */
+export function calculateSlouchRatio(
+  headMid: Point2D,
+  leftShoulder: Point2D,
+  rightShoulder: Point2D,
+): number {
+  const shoulderWidth = euclideanDistance(leftShoulder, rightShoulder);
+  if (shoulderWidth <= 1e-4) return 0;
+  const shoulderMidY = (leftShoulder.y + rightShoulder.y) / 2;
+  const neckVerticalHeight = Math.abs(shoulderMidY - headMid.y);
+  return neckVerticalHeight / shoulderWidth;
+}
+
+/**
+ * Menghitung kemiringan leher (Neck Angle) dengan koreksi aspect ratio.
+ * Mengadopsi arsitektur PostureGuardAI.
+ *
+ * @param ear Titik telinga (earMid atau ear lateral)
+ * @param shoulder Titik bahu (shoulderMid atau shoulder lateral)
+ * @param aspectRatio Rasio aspek video (default 640 / 480)
+ * @returns Sudut deviasi tegak [0, 90]
+ */
+export function calculateNeckAngle(
+  ear: Point2D,
+  shoulder: Point2D,
+  aspectRatio: number = 640 / 480,
+): number {
+  const dy = shoulder.y - ear.y;
+  const dx = (shoulder.x - ear.x) * aspectRatio;
+  const radians = Math.atan2(dy, dx);
+  const degrees = Math.abs((radians * 180.0) / Math.PI);
+  return Math.abs(90 - degrees);
+}
