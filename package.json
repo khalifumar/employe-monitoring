@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.14",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^22.10.2",
     "prettier": "^3.4.2",
     "typescript": "^5.7.2",
