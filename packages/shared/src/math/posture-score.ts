@@ -1,5 +1,5 @@
-import type { PersonalBaseline } from '../types';
-import { POSTURE_SCORE_BASE } from '../constants';
+import type { PersonalBaseline } from "../types";
+import { POSTURE_SCORE_BASE } from "../constants";
 
 export interface PostureMetrics {
   headForwardAngle: number;
@@ -27,18 +27,27 @@ export const DEFAULT_POSTURE_WEIGHTS: PostureWeights = {
 export function calculatePostureScore(
   current: PostureMetrics,
   baseline: PersonalBaseline,
-  weights: PostureWeights = DEFAULT_POSTURE_WEIGHTS
+  weights: PostureWeights = DEFAULT_POSTURE_WEIGHTS,
 ): number {
   // Deviation from calibrated neutral head angle
-  const headAngleDelta = Math.max(0, current.headForwardAngle - baseline.neutralHeadAngle);
+  const headAngleDelta = Math.max(
+    0,
+    current.headForwardAngle - baseline.neutralHeadAngle,
+  );
 
   // Deviation from calibrated neutral shoulder tilt
-  const shoulderTiltDelta = Math.max(0, current.shoulderTilt - baseline.neutralShoulderTilt);
+  const shoulderTiltDelta = Math.max(
+    0,
+    current.shoulderTilt - baseline.neutralShoulderTilt,
+  );
 
   // Relative deviation in screen distance (leaning too far in or slouching back)
-  const distanceRatio = baseline.neutralInterOcularDistance > 0
-    ? Math.abs(current.screenDistanceProxy - baseline.neutralInterOcularDistance) / baseline.neutralInterOcularDistance
-    : 0;
+  const distanceRatio =
+    baseline.neutralInterOcularDistance > 0
+      ? Math.abs(
+          current.screenDistanceProxy - baseline.neutralInterOcularDistance,
+        ) / baseline.neutralInterOcularDistance
+      : 0;
 
   const penalty =
     headAngleDelta * weights.headAngleWeight +

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const Point2DSchema = z.object({
   x: z.number(),
@@ -31,7 +31,10 @@ export const MouthLandmarksSchema = z.object({
 
 export const TelemetryPayloadSchema = z.object({
   user_pseudo_id: z.string().uuid().or(z.string().min(8)),
-  ts_minute: z.string().datetime({ offset: true }).or(z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/)),
+  ts_minute: z
+    .string()
+    .datetime({ offset: true })
+    .or(z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/)),
   ear_mean: z.number().min(0).max(1),
   perclos: z.number().min(0).max(1),
   blink_rate: z.number().min(0).max(120),
@@ -43,7 +46,9 @@ export const TelemetryPayloadSchema = z.object({
   sitting_continuous_min: z.number().min(0),
   idle_sec: z.number().min(0).max(60),
   input_events: z.number().int().min(0),
-  tab_category: z.enum(['work', 'communication', 'leisure', 'other']).nullable(),
+  tab_category: z
+    .enum(["work", "communication", "leisure", "other"])
+    .nullable(),
   meeting_mode: z.boolean(),
 });
 

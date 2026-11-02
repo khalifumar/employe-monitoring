@@ -1,4 +1,4 @@
-import type { EyeLandmarks, Point2D } from '../types';
+import type { EyeLandmarks, Point2D } from "../types";
 
 /**
  * Calculates Euclidean distance between two 2D points.
@@ -35,7 +35,10 @@ export function calculateEAR(eye: EyeLandmarks): number {
 /**
  * Calculates mean EAR between left and right eye.
  */
-export function calculateMeanEAR(leftEye: EyeLandmarks, rightEye: EyeLandmarks): number {
+export function calculateMeanEAR(
+  leftEye: EyeLandmarks,
+  rightEye: EyeLandmarks,
+): number {
   const leftEAR = calculateEAR(leftEye);
   const rightEAR = calculateEAR(rightEye);
   return (leftEAR + rightEAR) / 2.0;

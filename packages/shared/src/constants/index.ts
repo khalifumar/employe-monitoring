@@ -7,7 +7,7 @@ export const EAR_DEFAULT_THRESHOLD = 0.21;
 export const PERCLOS_WINDOW_SECONDS = 60;
 export const PERCLOS_WARN_THRESHOLD = 0.15; // 15% eye closure indicates early fatigue
 export const PERCLOS_SEVERE_THRESHOLD = 0.25; // 25% indicates severe drowsiness
-export const MAR_DEFAULT_YAWN_THRESHOLD = 0.60;
+export const MAR_DEFAULT_YAWN_THRESHOLD = 0.6;
 export const YAWN_MIN_DURATION_SECONDS = 2.0;
 
 // --- Posture & Ergonomics ---

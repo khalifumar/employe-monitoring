@@ -7,7 +7,12 @@
  * Calculates z-score: (value - mean) / std.
  * Protects against division by zero if std is negligible.
  */
-export function calculateZScore(value: number, mean: number, std: number, minStd = 1e-4): number {
+export function calculateZScore(
+  value: number,
+  mean: number,
+  std: number,
+  minStd = 1e-4,
+): number {
   const safeStd = Math.max(minStd, std);
   return (value - mean) / safeStd;
 }
@@ -21,7 +26,10 @@ export interface RunningStats {
 /**
  * Welford's algorithm for numerically stable incremental mean and variance computation.
  */
-export function updateRunningStats(stats: RunningStats, newValue: number): RunningStats {
+export function updateRunningStats(
+  stats: RunningStats,
+  newValue: number,
+): RunningStats {
   const newCount = stats.count + 1;
   const delta = newValue - stats.mean;
   const newMean = stats.mean + delta / newCount;

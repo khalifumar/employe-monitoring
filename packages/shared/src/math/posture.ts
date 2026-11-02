@@ -1,5 +1,5 @@
-import type { Point2D } from '../types';
-import { euclideanDistance } from './ear';
+import type { Point2D } from "../types";
+import { euclideanDistance } from "./ear";
 
 /**
  * Calculates head-forward angle (degrees) relative to vertical axis.
@@ -10,7 +10,10 @@ import { euclideanDistance } from './ear';
  * @param shoulder Corresponding shoulder landmark point
  * @returns Angle in degrees from vertical [0, 90]
  */
-export function calculateHeadForwardAngle(ear: Point2D, shoulder: Point2D): number {
+export function calculateHeadForwardAngle(
+  ear: Point2D,
+  shoulder: Point2D,
+): number {
   const dx = Math.abs(ear.x - shoulder.x);
   // In screen coords, shoulder is below ear (shoulder.y > ear.y)
   const dy = Math.max(1e-4, Math.abs(shoulder.y - ear.y));
@@ -25,7 +28,10 @@ export function calculateHeadForwardAngle(ear: Point2D, shoulder: Point2D): numb
  * @param rightShoulder Right shoulder point
  * @returns Tilt angle in degrees [0, 90]
  */
-export function calculateShoulderTilt(leftShoulder: Point2D, rightShoulder: Point2D): number {
+export function calculateShoulderTilt(
+  leftShoulder: Point2D,
+  rightShoulder: Point2D,
+): number {
   const dy = Math.abs(leftShoulder.y - rightShoulder.y);
   const dx = Math.max(1e-4, Math.abs(leftShoulder.x - rightShoulder.x));
   const radians = Math.atan2(dy, dx);
@@ -40,6 +46,9 @@ export function calculateShoulderTilt(leftShoulder: Point2D, rightShoulder: Poin
  * @param rightEye Right eye point
  * @returns Euclidean pixel/normalized distance
  */
-export function calculateScreenDistanceProxy(leftEye: Point2D, rightEye: Point2D): number {
+export function calculateScreenDistanceProxy(
+  leftEye: Point2D,
+  rightEye: Point2D,
+): number {
   return euclideanDistance(leftEye, rightEye);
 }

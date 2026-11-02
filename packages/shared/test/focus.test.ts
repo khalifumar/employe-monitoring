@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { calculateFocusIndex } from '../src/math/focus';
+import { describe, it, expect } from "vitest";
+import { calculateFocusIndex } from "../src/math/focus";
 
-describe('calculateFocusIndex (Model v0)', () => {
-  it('produces high score for balanced interaction, presence, and posture', () => {
+describe("calculateFocusIndex (Model v0)", () => {
+  it("produces high score for balanced interaction, presence, and posture", () => {
     const score = calculateFocusIndex({
       inputEvents: 60, // active typing/clicking
       facePresentRatio: 1.0,
@@ -15,7 +15,7 @@ describe('calculateFocusIndex (Model v0)', () => {
     expect(score).toBeLessThanOrEqual(100);
   });
 
-  it('recognizes meeting mode where typing is not penalized', () => {
+  it("recognizes meeting mode where typing is not penalized", () => {
     // In meeting mode, 0 input events but face present & upright posture
     const meetingScore = calculateFocusIndex({
       inputEvents: 0,
@@ -38,7 +38,7 @@ describe('calculateFocusIndex (Model v0)', () => {
     expect(workScore).toBeLessThan(meetingScore);
   });
 
-  it('bounds score between 0 and 100 under extreme conditions', () => {
+  it("bounds score between 0 and 100 under extreme conditions", () => {
     const zeroScore = calculateFocusIndex({
       inputEvents: 0,
       facePresentRatio: 0.0,

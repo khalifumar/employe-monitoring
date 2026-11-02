@@ -87,7 +87,7 @@ export interface TelemetryPayload {
   sitting_continuous_min: number;
   idle_sec: number;
   input_events: number; // Sum of clicks + scrolls + keypress counts (no content)
-  tab_category: 'work' | 'communication' | 'leisure' | 'other' | null;
+  tab_category: "work" | "communication" | "leisure" | "other" | null;
   meeting_mode: boolean;
 }
 
@@ -104,7 +104,7 @@ export interface ConsentSettings {
   last_updated: string;
 }
 
-export type UserRole = 'admin' | 'manager' | 'employee';
+export type UserRole = "admin" | "manager" | "employee";
 
 export interface UserProfile {
   id: string;
@@ -133,8 +133,8 @@ export interface SelfReport {
   burnout_item: number; // 1-5 emotional exhaustion item
 }
 
-export type FatigueRiskLevel = 'low' | 'moderate' | 'high';
-export type FocusIndicatorLevel = 'steady' | 'fluctuating' | 'low';
+export type FatigueRiskLevel = "low" | "moderate" | "high";
+export type FocusIndicatorLevel = "steady" | "fluctuating" | "low";
 
 export interface RiskFactorContribution {
   factor: string;

@@ -31,14 +31,16 @@ export interface FocusInputParams {
  * Visual presence and active listening are weighted higher, and typing is not required.
  */
 export function calculateFocusIndex(params: FocusInputParams): number {
-  const { inputEvents, facePresentRatio, postureScore, idleSec, meetingMode } = params;
+  const { inputEvents, facePresentRatio, postureScore, idleSec, meetingMode } =
+    params;
 
   if (meetingMode) {
     // In meeting mode: listening and visual presence dominate, typing is optional
     const presenceWeight = 0.65;
     const postureWeight = 0.35;
     const postureNorm = Math.max(0, Math.min(1.0, postureScore / 100.0));
-    const score = (facePresentRatio * presenceWeight + postureNorm * postureWeight) * 100.0;
+    const score =
+      (facePresentRatio * presenceWeight + postureNorm * postureWeight) * 100.0;
     return Math.round(Math.max(0, Math.min(100, score)));
   }
 
@@ -53,9 +55,10 @@ export function calculateFocusIndex(params: FocusInputParams): number {
 
   // Balanced weighting: 40% input interaction, 35% screen presence, 25% posture stability
   const weightedScore =
-    (0.40 * inputNorm * activeRatio +
-     0.35 * facePresentRatio +
-     0.25 * postureNorm) * 100.0;
+    (0.4 * inputNorm * activeRatio +
+      0.35 * facePresentRatio +
+      0.25 * postureNorm) *
+    100.0;
 
   return Math.round(Math.max(0, Math.min(100, weightedScore)));
 }

@@ -1,6 +1,9 @@
-import type { MouthLandmarks } from '../types';
-import { MAR_DEFAULT_YAWN_THRESHOLD, YAWN_MIN_DURATION_SECONDS } from '../constants';
-import { euclideanDistance } from './ear';
+import type { MouthLandmarks } from "../types";
+import {
+  MAR_DEFAULT_YAWN_THRESHOLD,
+  YAWN_MIN_DURATION_SECONDS,
+} from "../constants";
+import { euclideanDistance } from "./ear";
 
 /**
  * Calculates Mouth Aspect Ratio (MAR) for yawn detection.
@@ -38,7 +41,7 @@ export function updateYawnTracker(
   currentMAR: number,
   timestampMs: number,
   threshold: number = MAR_DEFAULT_YAWN_THRESHOLD,
-  minDurationSec: number = YAWN_MIN_DURATION_SECONDS
+  minDurationSec: number = YAWN_MIN_DURATION_SECONDS,
 ): { nextState: YawnTrackerState; justCompletedYawn: boolean } {
   const isOpen = currentMAR >= threshold;
 

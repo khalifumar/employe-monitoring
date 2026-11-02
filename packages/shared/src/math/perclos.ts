@@ -1,4 +1,4 @@
-import { EAR_DEFAULT_THRESHOLD } from '../constants';
+import { EAR_DEFAULT_THRESHOLD } from "../constants";
 
 export interface EARObservation {
   ear: number;
@@ -20,17 +20,18 @@ export function calculatePERCLOS(
   observations: EARObservation[],
   earThreshold: number = EAR_DEFAULT_THRESHOLD,
   windowMs: number = 60_000,
-  currentTimeMs?: number
+  currentTimeMs?: number,
 ): number {
   if (observations.length === 0) {
     return 0.0;
   }
 
-  const latestTime = currentTimeMs ?? observations[observations.length - 1]!.timestampMs;
+  const latestTime =
+    currentTimeMs ?? observations[observations.length - 1]!.timestampMs;
   const windowStart = latestTime - windowMs;
 
   const validObservations = observations.filter(
-    (obs) => obs.timestampMs >= windowStart && obs.timestampMs <= latestTime
+    (obs) => obs.timestampMs >= windowStart && obs.timestampMs <= latestTime,
   );
 
   if (validObservations.length === 0) {
